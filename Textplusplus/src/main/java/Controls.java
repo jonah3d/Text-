@@ -52,7 +52,7 @@ public class Controls implements ActionListener {
         if(e.getSource()==MB.SaveAs){
 
             JFileChooser fileChooser=new JFileChooser();
-            //fileChooser.setCurrentDirectory(new File("C:\\Users\\jonah\\Documents\\"));
+
 
             int resp = fileChooser.showSaveDialog(null);
             if(resp==JFileChooser.APPROVE_OPTION){
