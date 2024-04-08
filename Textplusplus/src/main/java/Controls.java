@@ -111,6 +111,7 @@ public class Controls implements ActionListener {
             WA.fonstyle_I.setForeground(Color.WHITE);
             WA.getTexteditor().setBackground(Color.BLACK);
             WA.getTexteditor().setForeground(Color.WHITE);
+
          }
 
         else if (e.getSource()==MB.Theme_white){
