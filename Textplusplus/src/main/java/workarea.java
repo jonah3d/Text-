@@ -147,7 +147,7 @@ public class workarea {
     }
 
     File file;
-    file = new File(get);
+
 
     /*****SETTER GETTERS*****/
 
