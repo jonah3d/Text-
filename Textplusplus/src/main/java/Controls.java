@@ -107,6 +107,8 @@ public class Controls implements ActionListener {
             WA.fontsizelabel.setForeground(Color.WHITE);
             WA.fonttype.setForeground(Color.WHITE);
             WA.fontcolor.setForeground(Color.WHITE);
+            WA.fontstyle.setForeground(Color.WHITE);
+            WA.fonstyle_I.setForeground(Color.WHITE);
             WA.getTexteditor().setBackground(Color.BLACK);
             WA.getTexteditor().setForeground(Color.WHITE);
          }
@@ -119,6 +121,8 @@ public class Controls implements ActionListener {
             WA.fontsizelabel.setForeground(Color.BLACK);
             WA.fonttype.setForeground(Color.BLACK);
             WA.fontcolor.setForeground(Color.BLACK);
+            WA.fontstyle.setForeground(Color.BLACK);
+            WA.fonstyle_I.setForeground(Color.BLACK);
             WA.getTexteditor().setBackground(Color.WHITE);
             WA.getTexteditor().setForeground(Color.BLACK);
         }
