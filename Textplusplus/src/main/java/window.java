@@ -14,7 +14,7 @@ public class window  {
 
     Controls ctrl;
 
-    window(){
+    public window(){
         //CREATION OF THE JFRAME AND THE MAIN COMPONENTS FOUND WITHIN
         workspace = new JFrame();
         menu = new win_menubar();

@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Controls implements ActionListener {
     workarea WA;
     win_menubar MB;
+    window wdw;
 
     public Controls(workarea WA, win_menubar MB) {
         this.WA = WA;
@@ -134,6 +135,13 @@ public class Controls implements ActionListener {
                     ex.printStackTrace();
                 }
             }
+        }
+
+        if (e.getSource()==MB.New){
+
+                window win = new window();
+
+
         }
 
         /**********************************************************************************************************************************/
