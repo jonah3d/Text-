@@ -35,6 +35,7 @@ public class workarea {
     JLabel fontsizelabel;
     JLabel fonttype;
     JLabel fontcolor;
+    private File currentFile;
     public workarea(){
         /*INITIALISATION OF COMPONENETS*/
     main_panel = new JPanel();
@@ -73,7 +74,7 @@ public class workarea {
     formattingArea.setLayout(new FlowLayout(FlowLayout.LEFT,10,5));
     formattingArea.add(fonttype);
     formattingArea.add(fontBox);
-    //fontBox.addActionListener(this);
+
     fontBox.setSelectedItem("Courier");
         fontsizeSpinner.setPreferredSize(new Dimension(50,25));
         fontsizeSpinner.setValue(11);
@@ -83,17 +84,18 @@ public class workarea {
                 texteditor.setFont(new Font(texteditor.getFont().getFamily(),Font.PLAIN,(int)fontsizeSpinner.getValue()));
             }
         });
-       //fontcolorbutton.addActionListener(this);
+  ;
         formattingArea.add(fontsizelabel);
-       //fontstyle.addActionListener(this);
+
         fontstyle.setFocusable(false);
         fonstyle_I.setFocusable(false);
-       //fonstyle_I.addActionListener(this);
+
     formattingArea.add(fontsizeSpinner);
     formattingArea.add(fontcolor);
     formattingArea.add(fontcolorbutton);
     formattingArea.add(fontstyle);
     formattingArea.add(fonstyle_I);
+
 
 
     char_counter.setForeground(Color.white);
@@ -120,6 +122,7 @@ public class workarea {
 
         // Setting the initial char count
         updateCharCount();
+        currentdirectoryDisplay();
         texteditor.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -137,6 +140,23 @@ public class workarea {
             }
         });
 
+        texteditor.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                currentdirectoryDisplay();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                currentdirectoryDisplay();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                currentdirectoryDisplay();
+            }
+        });
+
 
     }
 
@@ -145,8 +165,13 @@ public class workarea {
         int charCount = texteditor.getText().length();
         char_counter.setText("Characters: " + charCount);
     }
-
-    File file;
+    public void currentdirectoryDisplay() {
+        if (currentFile != null) { // Check if currentFile is not null
+            docu_dir.setText("                                              Current Directory: " + currentFile.getAbsolutePath());
+        } else {
+            docu_dir.setText("                                              Current Directory: ");
+        }
+    }
 
 
     /*****SETTER GETTERS*****/
@@ -201,6 +226,14 @@ public class workarea {
 
     public JLabel getDocu_dir() {
         return docu_dir;
+    }
+
+    public File getCurrentFile() {
+        return currentFile;
+    }
+
+    public void setCurrentFile(File currentFile) {
+        this.currentFile = currentFile;
     }
 
     public void setDocu_dir(JLabel docu_dir) {

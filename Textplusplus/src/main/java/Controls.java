@@ -56,12 +56,11 @@ public class Controls implements ActionListener {
 
             int resp = fileChooser.showSaveDialog(null);
             if(resp==JFileChooser.APPROVE_OPTION){
-                File file;
                 PrintWriter fileOut = null;
 
-                file=new File(fileChooser.getSelectedFile().getAbsolutePath());
+                WA.setCurrentFile(new File(fileChooser.getSelectedFile().getAbsolutePath()));
                 try {
-                    fileOut = new PrintWriter(file);
+                    fileOut = new PrintWriter(WA.getCurrentFile());
                     String text = WA.getTexteditor().getText();
                     fileOut.println(text);
                 }catch (Exception e1){
@@ -73,18 +72,58 @@ public class Controls implements ActionListener {
                 }
             }
         }
+
+        /*SAVE LOGIC*/
+        if(e.getSource()==MB.Save) {
+
+            if (WA.getCurrentFile() != null) {
+                PrintWriter fileOut = null;
+                try {
+                    fileOut = new PrintWriter(WA.getCurrentFile().getAbsolutePath());
+                    String text = WA.getTexteditor().getText();
+                    fileOut.println(text);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } finally {
+                    if (fileOut != null) {
+                        fileOut.close();
+                    }
+                }
+            }else {
+                JFileChooser fileChooser=new JFileChooser();
+                int resp = fileChooser.showSaveDialog(null);
+                if(resp==JFileChooser.APPROVE_OPTION){
+                    PrintWriter fileOut = null;
+
+                    WA.setCurrentFile(new File(fileChooser.getSelectedFile().getAbsolutePath()));
+                    try {
+                        fileOut = new PrintWriter(WA.getCurrentFile());
+                        String text = WA.getTexteditor().getText();
+                        fileOut.println(text);
+                    }catch (Exception e1){
+                        e1.printStackTrace();
+                    }finally {
+                        if (fileOut!=null){
+                            fileOut.close();
+                        }
+                    }
+                }
+
+            }
+        }
         //*OPEN BUTTON LOGIC*//
         if(e.getSource()==MB.Open) {
             JFileChooser chooser = new JFileChooser();
             int result = chooser.showOpenDialog(null);
             chooser.setVisible(true);
             if (result==JFileChooser.APPROVE_OPTION){
-                File file = new File(chooser.getSelectedFile().toString());
+                //File file = new File(chooser.getSelectedFile().toString());
+                WA.setCurrentFile(new File(chooser.getSelectedFile().toString()));
                 try {
 
                     //WA.getTexteditor().setText("");
-                    Scanner std = new Scanner(file);
-                    if (file.isFile()) {
+                    Scanner std = new Scanner(WA.getCurrentFile());
+                    if (WA.getCurrentFile().isFile()) {
                         while (std.hasNextLine()) {
                             String data = std.nextLine();
                             WA.getTexteditor().append(data + "\n");
