@@ -138,7 +138,6 @@ public class Controls implements ActionListener {
         }
 
         if (e.getSource()==MB.New){
-
                 window win = new window();
 
 
