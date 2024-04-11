@@ -121,6 +121,9 @@ public class win_menubar  {
         this.Theme_black.addActionListener(listener);
         this.Theme_white.addActionListener(listener);
 
+        this.Github.addActionListener(listener);
+        this.Documentation.addActionListener(listener);
+
     }
 
 }

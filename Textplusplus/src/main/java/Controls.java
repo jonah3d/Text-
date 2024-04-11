@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.util.Scanner;
 
 public class Controls implements ActionListener {
@@ -139,7 +140,14 @@ public class Controls implements ActionListener {
 
         if (e.getSource()==MB.New){
                 window win = new window();
-
+        }
+        if (e.getSource()==MB.Github){
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/jonah3d/Textplusplus.git"));
+            }catch (Exception dk)
+            {
+                System.out.println(dk.getMessage());
+            }
 
         }
 
