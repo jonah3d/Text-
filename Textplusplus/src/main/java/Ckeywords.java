@@ -1,5 +1,5 @@
 public enum Ckeywords {
-    auto,
+   /* auto,
     double,
     int,
     struct,
@@ -32,6 +32,6 @@ public enum Ckeywords {
     do,
     if,
     static,
-    while
+    while*/
 
 }
