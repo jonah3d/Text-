@@ -123,6 +123,7 @@ public class win_menubar  {
 
         this.Github.addActionListener(listener);
         this.Documentation.addActionListener(listener);
+        this.Contact.addActionListener(listener);
 
     }
 

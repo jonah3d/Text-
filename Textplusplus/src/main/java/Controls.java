@@ -12,13 +12,19 @@ public class Controls implements ActionListener {
     workarea WA;
     win_menubar MB;
     window wdw;
+    ContactForm CF;
+    Person person = new Person();
 
     public Controls(workarea WA, win_menubar MB) {
         this.WA = WA;
         this.MB = MB;
 
+
+
         WA.actionlistener(this);
         MB.actionlistener(this);
+        CF.actionlistener(this);
+
     }
 
     @Override
@@ -150,6 +156,23 @@ public class Controls implements ActionListener {
             }
 
         }
+        if (e.getSource()==MB.Contact){
+
+            CF = new ContactForm();
+
+        }
+
+        if (e.getSource() == CF.sendButton) {
+            String name = CF.nameField.getText();
+            String email = CF.emailField.getText();
+            person.setP_name(name);
+            person.setP_email(email);
+            System.out.println("NAME:  " + name);
+            System.out.println("EMAIL:  " + email);
+            System.exit(0);
+
+        }
+
 
         /**********************************************************************************************************************************/
         /**************************THEME CHANGE*********************************************************************************/
@@ -182,4 +205,6 @@ public class Controls implements ActionListener {
             WA.getTexteditor().setForeground(Color.BLACK);
         }
     }
+
+
 }
