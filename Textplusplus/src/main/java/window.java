@@ -19,7 +19,8 @@ public class window  {
         workspace = new JFrame();
         menu = new win_menubar();
         panel = new workarea();
-        icon = new ImageIcon("src/main/resources/textplusplsicon_black-01.png");
+        icon = new ImageIcon("E:\\Software Development\\T++\\Textplusplus\\src\\main\\resources\\textplusplsicon_black-01.png");
+
         ctrl= new Controls(panel,menu);
 
         workspace.setTitle("Text++");

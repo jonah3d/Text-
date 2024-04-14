@@ -23,7 +23,7 @@ public class Controls implements ActionListener {
 
         WA.actionlistener(this);
         MB.actionlistener(this);
-        CF.actionlistener(this);
+        //CF.actionlistener(this);
 
     }
 
@@ -146,6 +146,7 @@ public class Controls implements ActionListener {
 
         if (e.getSource()==MB.New){
                 window win = new window();
+
         }
         if (e.getSource()==MB.Github){
             try {
@@ -159,6 +160,7 @@ public class Controls implements ActionListener {
         if (e.getSource()==MB.Contact){
 
             CF = new ContactForm();
+            CF.actionlistener(this);
 
         }
 
@@ -169,7 +171,8 @@ public class Controls implements ActionListener {
             person.setP_email(email);
             System.out.println("NAME:  " + name);
             System.out.println("EMAIL:  " + email);
-            System.exit(0);
+            CF.ContactFrame.dispose();
+
 
         }
 
