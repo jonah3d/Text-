@@ -1,9 +1,13 @@
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Main {
+
     public static void main(String[] args) {
 
         try{
@@ -13,6 +17,9 @@ public class Main {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+
+
+
         }catch (ClassNotFoundException e){
             e.getException();
         }catch (UnsupportedLookAndFeelException e){

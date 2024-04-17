@@ -125,6 +125,10 @@ public class win_menubar  {
         this.Documentation.addActionListener(listener);
         this.Contact.addActionListener(listener);
 
+        this.O_CommandPrompt.addActionListener(listener);
+        this.Runcode.addActionListener(listener);
+        this.CompilerDir.addActionListener(listener);
+
     }
 
 }

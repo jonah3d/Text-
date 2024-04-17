@@ -1,9 +1,12 @@
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.util.Scanner;
@@ -15,7 +18,8 @@ public class Controls implements ActionListener {
     ContactForm CF;
     Person person = new Person();
 
-    public Controls(workarea WA, win_menubar MB) {
+
+    public Controls(workarea WA, win_menubar MB)  {
         this.WA = WA;
         this.MB = MB;
 
@@ -23,7 +27,8 @@ public class Controls implements ActionListener {
 
         WA.actionlistener(this);
         MB.actionlistener(this);
-        //CF.actionlistener(this);
+
+
 
     }
 
@@ -161,21 +166,34 @@ public class Controls implements ActionListener {
 
             CF = new ContactForm();
             CF.actionlistener(this);
-
-        }
-
-        if (e.getSource() == CF.sendButton) {
-            String name = CF.nameField.getText();
-            String email = CF.emailField.getText();
-            person.setP_name(name);
-            person.setP_email(email);
-            System.out.println("NAME:  " + name);
-            System.out.println("EMAIL:  " + email);
-            CF.ContactFrame.dispose();
+            ContactFormControl control = new ContactFormControl(CF);
 
 
         }
 
+        if (e.getSource() == MB.O_CommandPrompt) {
+            try {
+                File file = WA.getCurrentFile();
+                if (file != null) {
+                    String fileLocale = file.getParent();
+
+                    ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "start")
+                            .directory(new File(fileLocale));
+
+                    Process process = processBuilder.start();
+
+                    process.waitFor();
+
+                    // Optional: Retrieve the exit value of the process
+                    int exitValue = process.exitValue();
+                    System.out.println("Command prompt opened with exit value: " + exitValue);
+                } else {
+                    System.out.println("No current file selected.");
+                }
+            } catch (IOException | InterruptedException ef) {
+                ef.printStackTrace();
+            }
+        }
 
         /**********************************************************************************************************************************/
         /**************************THEME CHANGE*********************************************************************************/

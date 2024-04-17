@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,9 +13,11 @@ public class window  {
     workarea panel;
     ImageIcon icon;
 
+
     Controls ctrl;
 
-    public window(){
+
+    public window()  {
         //CREATION OF THE JFRAME AND THE MAIN COMPONENTS FOUND WITHIN
         workspace = new JFrame();
         menu = new win_menubar();
