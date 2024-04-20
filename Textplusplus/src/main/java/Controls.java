@@ -19,56 +19,54 @@ public class Controls implements ActionListener {
     Person person = new Person();
 
 
-    public Controls(workarea WA, win_menubar MB)  {
+    public Controls(workarea WA, win_menubar MB) {
         this.WA = WA;
         this.MB = MB;
-
 
 
         WA.actionlistener(this);
         MB.actionlistener(this);
 
 
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==WA.fontBox){
-            WA.texteditor.setFont(new Font((String)WA.fontBox.getSelectedItem(),Font.PLAIN,WA.texteditor.getFont().getSize()));
+        if (e.getSource() == WA.fontBox) {
+            WA.texteditor.setFont(new Font((String) WA.fontBox.getSelectedItem(), Font.PLAIN, WA.texteditor.getFont().getSize()));
         }
-        if (e.getSource()==WA.fontcolorbutton){
+        if (e.getSource() == WA.fontcolorbutton) {
             JColorChooser colorChooser = new JColorChooser();
 
-            Color color = colorChooser.showDialog(null,"Choose A Color",Color.BLACK);
+            Color color = colorChooser.showDialog(null, "Choose A Color", Color.BLACK);
             WA.texteditor.setForeground(color);
         }
-        if (e.getSource()==WA.fontstyle){
-            if (WA.fontstyle.isSelected()){
-                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(),Font.BOLD,WA.texteditor.getFont().getSize()));
-            }else
-                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(),Font.PLAIN,WA.texteditor.getFont().getSize()));
+        if (e.getSource() == WA.fontstyle) {
+            if (WA.fontstyle.isSelected()) {
+                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(), Font.BOLD, WA.texteditor.getFont().getSize()));
+            } else
+                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(), Font.PLAIN, WA.texteditor.getFont().getSize()));
 
         }
-        if (e.getSource()==WA.fonstyle_I){
-            if (WA.fontstyle.isSelected()){
-                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(),Font.ITALIC,WA.texteditor.getFont().getSize()));
-            }else
-                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(),Font.PLAIN,WA.texteditor.getFont().getSize()));
+        if (e.getSource() == WA.fonstyle_I) {
+            if (WA.fontstyle.isSelected()) {
+                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(), Font.ITALIC, WA.texteditor.getFont().getSize()));
+            } else
+                WA.texteditor.setFont(new Font(WA.texteditor.getFont().getFamily(), Font.PLAIN, WA.texteditor.getFont().getSize()));
 
         }
         /*EXIT BUTTON LOGIC*/
-        if (e.getSource()==MB.Exit){
+        if (e.getSource() == MB.Exit) {
             System.exit(0);
         }
         /*SAVE AS BUTTON LOGIC*/
-        if(e.getSource()==MB.SaveAs){
+        if (e.getSource() == MB.SaveAs) {
 
-            JFileChooser fileChooser=new JFileChooser();
+            JFileChooser fileChooser = new JFileChooser();
 
 
             int resp = fileChooser.showSaveDialog(null);
-            if(resp==JFileChooser.APPROVE_OPTION){
+            if (resp == JFileChooser.APPROVE_OPTION) {
                 PrintWriter fileOut = null;
 
                 WA.setCurrentFile(new File(fileChooser.getSelectedFile().getAbsolutePath()));
@@ -76,10 +74,10 @@ public class Controls implements ActionListener {
                     fileOut = new PrintWriter(WA.getCurrentFile());
                     String text = WA.getTexteditor().getText();
                     fileOut.println(text);
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     e1.printStackTrace();
-                }finally {
-                    if (fileOut!=null){
+                } finally {
+                    if (fileOut != null) {
                         fileOut.close();
                     }
                 }
@@ -87,7 +85,7 @@ public class Controls implements ActionListener {
         }
 
         /*SAVE LOGIC*/
-        if(e.getSource()==MB.Save) {
+        if (e.getSource() == MB.Save) {
 
             if (WA.getCurrentFile() != null) {
                 PrintWriter fileOut = null;
@@ -102,10 +100,10 @@ public class Controls implements ActionListener {
                         fileOut.close();
                     }
                 }
-            }else {
-                JFileChooser fileChooser=new JFileChooser();
+            } else {
+                JFileChooser fileChooser = new JFileChooser();
                 int resp = fileChooser.showSaveDialog(null);
-                if(resp==JFileChooser.APPROVE_OPTION){
+                if (resp == JFileChooser.APPROVE_OPTION) {
                     PrintWriter fileOut = null;
 
                     WA.setCurrentFile(new File(fileChooser.getSelectedFile().getAbsolutePath()));
@@ -113,10 +111,10 @@ public class Controls implements ActionListener {
                         fileOut = new PrintWriter(WA.getCurrentFile());
                         String text = WA.getTexteditor().getText();
                         fileOut.println(text);
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         e1.printStackTrace();
-                    }finally {
-                        if (fileOut!=null){
+                    } finally {
+                        if (fileOut != null) {
                             fileOut.close();
                         }
                     }
@@ -125,11 +123,11 @@ public class Controls implements ActionListener {
             }
         }
         //*OPEN BUTTON LOGIC*//
-        if(e.getSource()==MB.Open) {
+        if (e.getSource() == MB.Open) {
             JFileChooser chooser = new JFileChooser();
             int result = chooser.showOpenDialog(null);
             chooser.setVisible(true);
-            if (result==JFileChooser.APPROVE_OPTION){
+            if (result == JFileChooser.APPROVE_OPTION) {
                 //File file = new File(chooser.getSelectedFile().toString());
                 WA.setCurrentFile(new File(chooser.getSelectedFile().toString()));
                 try {
@@ -149,56 +147,56 @@ public class Controls implements ActionListener {
             }
         }
 
-        if (e.getSource()==MB.New){
-                window win = new window();
+        if (e.getSource() == MB.New) {
+            window win = new window();
 
         }
-        if (e.getSource()==MB.Github){
+        if (e.getSource() == MB.Github) {
             try {
                 Desktop.getDesktop().browse(new URI("https://github.com/jonah3d/Textplusplus.git"));
-            }catch (Exception dk)
-            {
+            } catch (Exception dk) {
                 System.out.println(dk.getMessage());
             }
 
         }
-        if (e.getSource()==MB.Contact){
+        if (e.getSource() == MB.Contact) {
 
             CF = new ContactForm();
             CF.actionlistener(this);
             ContactFormControl control = new ContactFormControl(CF);
-
+            CF.ContactFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         }
 
-        if (e.getSource() == MB.O_CommandPrompt) {
-            try {
-                File file = WA.getCurrentFile();
-                if (file != null) {
-                    String fileLocale = file.getParent();
 
-                    ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "start")
-                            .directory(new File(fileLocale));
 
-                    Process process = processBuilder.start();
 
-                    process.waitFor();
+        if (e.getSource() == MB.Runcode) {
+            File file = WA.getCurrentFile();
+            if (file != null) {
+                String outputFileName = file.getName().replaceFirst("[.][^.]+$", "");
+                String runcode = "gcc " + file.getName() + " -o " + outputFileName;
+                int exitValue = MB.OpenCommandPromptFile(file, runcode);
+                if (exitValue == 0) {
 
-                    // Optional: Retrieve the exit value of the process
-                    int exitValue = process.exitValue();
-                    System.out.println("Command prompt opened with exit value: " + exitValue);
+                    System.out.println("Command executed successfully.");
                 } else {
-                    System.out.println("No current file selected.");
+
+                    System.out.println("Command execution failed with exit value: " + exitValue);
                 }
-            } catch (IOException | InterruptedException ef) {
-                ef.printStackTrace();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a file.", "File not selected", JOptionPane.WARNING_MESSAGE);
             }
         }
 
+
+
+
+
         /**********************************************************************************************************************************/
         /**************************THEME CHANGE*********************************************************************************/
-        if (e.getSource()==MB.Theme_black){
-         WA.getInfoArea().setBackground(Color.BLACK);
+        if (e.getSource() == MB.Theme_black) {
+            WA.getInfoArea().setBackground(Color.BLACK);
             WA.docu_dir.setForeground(Color.WHITE);
             WA.char_counter.setForeground(Color.WHITE);
             WA.getFormattingArea().setBackground(Color.BLACK);
@@ -210,9 +208,7 @@ public class Controls implements ActionListener {
             WA.getTexteditor().setBackground(Color.BLACK);
             WA.getTexteditor().setForeground(Color.WHITE);
 
-         }
-
-        else if (e.getSource()==MB.Theme_white){
+        } else if (e.getSource() == MB.Theme_white) {
             WA.getInfoArea().setBackground(Color.WHITE);
             WA.docu_dir.setForeground(Color.BLACK);
             WA.char_counter.setForeground(Color.BLACK);
@@ -227,5 +223,17 @@ public class Controls implements ActionListener {
         }
     }
 
+    private void executeCommand(String command) {
+        try {
 
+            Process process = Runtime.getRuntime().exec(command);
+
+            process.waitFor();
+
+            int exitValue = process.exitValue();
+
+        } catch (IOException | InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -31,7 +31,7 @@ public class win_menubar  {
 
     /*Run Menu Items*/
     JMenuItem Runcode;
-    JMenuItem O_CommandPrompt;
+
     JMenuItem CompilerDir;
 
     /*HELP ITEMS*/
@@ -62,7 +62,7 @@ public class win_menubar  {
 
 
        Runcode =  new JMenuItem("Run Code");
-       O_CommandPrompt = new JMenuItem("Open CMD");
+
        CompilerDir = new JMenuItem("Compiler Dir");
 
        Github =  new JMenuItem("Github");
@@ -92,7 +92,7 @@ public class win_menubar  {
 
         /*RUN ITEMS*/
         Run.add(Runcode);
-        Run.add(O_CommandPrompt);
+
         Run.add(CompilerDir);
 
         /*HELP ITEMS*/
@@ -125,10 +125,48 @@ public class win_menubar  {
         this.Documentation.addActionListener(listener);
         this.Contact.addActionListener(listener);
 
-        this.O_CommandPrompt.addActionListener(listener);
+
         this.Runcode.addActionListener(listener);
         this.CompilerDir.addActionListener(listener);
 
     }
+
+    public int OpenCommandPromptFile(File file, String... command) {
+        try {
+            if (file != null) {
+                String fileLocale = file.getParent();
+
+                String[] fullCommand = new String[command.length + 3];
+                fullCommand[0] = "cmd.exe";
+                fullCommand[1] = "/c";
+                System.arraycopy(command, 0, fullCommand, 2, command.length);
+
+                fullCommand[command.length + 2] =  file.getName().replaceFirst("[.][^.]+$", "");
+
+                ProcessBuilder processBuilder = new ProcessBuilder(fullCommand)
+                        .directory(new File(fileLocale));
+
+                processBuilder.inheritIO();
+                Process process = processBuilder.start();
+
+                process.waitFor();
+
+                // Get the exit value of the process
+                int exitValue = process.exitValue();
+                System.out.println("Command executed with exit value: " + exitValue);
+                return exitValue;
+            }
+        } catch (IOException | InterruptedException ef) {
+            ef.printStackTrace();
+        }
+        return -1;
+    }
+
+
+
+
+
+
+
 
 }

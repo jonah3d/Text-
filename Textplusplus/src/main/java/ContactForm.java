@@ -25,6 +25,7 @@ public class ContactForm {
         this.ContactFrame.setTitle("Contact Us");
         this.ContactFrame.setSize(new Dimension(400,400));
 
+
         /*··································································*/
         panel1=new JPanel(new FlowLayout());
 
@@ -91,6 +92,8 @@ public class ContactForm {
     public void actionlistener(ActionListener listener){
         this.sendButton.addActionListener(listener);
     }
+
+
 
 
 }
