@@ -6,7 +6,7 @@ import java.util.Properties;
 public class Mail {
     Session newSession = null;
 
-
+    //JAVA MAIL API CONFIGURATION
 
     public MimeMessage draftEmail(String emailSubject, String emailBody ) throws MessagingException {
          String emailRecipients = "jonah3d.arthur@gmail.com";

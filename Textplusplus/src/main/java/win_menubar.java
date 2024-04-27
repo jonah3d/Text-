@@ -32,11 +32,11 @@ public class win_menubar  {
     /*Run Menu Items*/
     JMenuItem Runcode;
 
-    JMenuItem CompilerDir;
+
 
     /*HELP ITEMS*/
     JMenuItem Github;
-    JMenuItem Documentation;
+
     JMenuItem Contact;
 
     public win_menubar(){
@@ -63,10 +63,10 @@ public class win_menubar  {
 
        Runcode =  new JMenuItem("Run Code");
 
-       CompilerDir = new JMenuItem("Compiler Dir");
+
 
        Github =  new JMenuItem("Github");
-       Documentation =  new JMenuItem("Documentation");
+
        Contact =  new JMenuItem("Contact");
        /*----------------------------------------------------------------------------------------------------*/
 
@@ -93,11 +93,9 @@ public class win_menubar  {
         /*RUN ITEMS*/
         Run.add(Runcode);
 
-        Run.add(CompilerDir);
-
         /*HELP ITEMS*/
         Help.add(Github);
-        Help.add(Documentation);
+
         Help.add(Contact);
         /*-------------------------------------------------------------------------------------------------------*/
 
@@ -122,45 +120,15 @@ public class win_menubar  {
         this.Theme_white.addActionListener(listener);
 
         this.Github.addActionListener(listener);
-        this.Documentation.addActionListener(listener);
+
         this.Contact.addActionListener(listener);
 
 
         this.Runcode.addActionListener(listener);
-        this.CompilerDir.addActionListener(listener);
+
 
     }
 
-    public int OpenCommandPromptFile(File file, String... command) {
-        try {
-            if (file != null) {
-                String fileLocale = file.getParent();
-
-                String[] fullCommand = new String[command.length + 3];
-                fullCommand[0] = "cmd.exe";
-                fullCommand[1] = "/c";
-                System.arraycopy(command, 0, fullCommand, 2, command.length);
-
-                fullCommand[command.length + 2] =  file.getName().replaceFirst("[.][^.]+$", "");
-
-                ProcessBuilder processBuilder = new ProcessBuilder(fullCommand)
-                        .directory(new File(fileLocale));
-
-                processBuilder.inheritIO();
-                Process process = processBuilder.start();
-
-                process.waitFor();
-
-                // Get the exit value of the process
-                int exitValue = process.exitValue();
-                System.out.println("Command executed with exit value: " + exitValue);
-                return exitValue;
-            }
-        } catch (IOException | InterruptedException ef) {
-            ef.printStackTrace();
-        }
-        return -1;
-    }
 
 
 

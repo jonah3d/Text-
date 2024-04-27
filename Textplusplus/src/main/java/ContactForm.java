@@ -20,6 +20,8 @@ public class ContactForm {
     JButton sendButton;
     JSeparator separator;
     JScrollPane scrollPane;
+
+    // CLASS FOR SETTING UP THE CONTACT FORM
     public ContactForm(){
         this.ContactFrame = new JFrame();
         this.ContactFrame.setTitle("Contact Us");

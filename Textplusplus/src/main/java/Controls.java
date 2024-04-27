@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.util.Scanner;
 
+//MAIN CONTROL CLASS
+
 public class Controls implements ActionListener {
     workarea WA;
     win_menubar MB;
@@ -147,10 +149,14 @@ public class Controls implements ActionListener {
             }
         }
 
+        /**NEW LOGIC**/
         if (e.getSource() == MB.New) {
             window win = new window();
+            win.workspace.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         }
+
+        /**GITHUB LOGIC**/
         if (e.getSource() == MB.Github) {
             try {
                 Desktop.getDesktop().browse(new URI("https://github.com/jonah3d/Textplusplus.git"));
@@ -159,6 +165,9 @@ public class Controls implements ActionListener {
             }
 
         }
+
+
+        /**CONTACT LOGIC**/
         if (e.getSource() == MB.Contact) {
 
             CF = new ContactForm();
@@ -169,26 +178,42 @@ public class Controls implements ActionListener {
         }
 
 
-
-
+        /**RUN LOGIC**/
         if (e.getSource() == MB.Runcode) {
             File file = WA.getCurrentFile();
             if (file != null) {
-                String outputFileName = file.getName().replaceFirst("[.][^.]+$", "");
-                String runcode = "gcc " + file.getName() + " -o " + outputFileName;
-                int exitValue = MB.OpenCommandPromptFile(file, runcode);
-                if (exitValue == 0) {
+                // Extract file name without extension
+                String fileName = file.getName();
+                int dotIndex = fileName.lastIndexOf('.');
+                String programName = (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
 
-                    System.out.println("Command executed successfully.");
-                } else {
+                try {
+                    // Create a temporary batch file
+                    File batchFile = File.createTempFile("run", ".bat");
+                    PrintWriter writer = new PrintWriter(batchFile);
+                    writer.println("@echo off");
+                    writer.println("gcc " + file.getAbsolutePath() + " -o " + programName + ".exe");
+                    writer.println("if %errorlevel% neq 0 (");
+                    writer.println("    echo Compilation failed.");
+                    writer.println("    pause");
+                    writer.println(") else (");
+                    writer.println("    " + programName + ".exe");
+                    writer.println("    echo.");
+                    writer.println("    pause");
+                    writer.println(")");
+                    writer.close();
 
-                    System.out.println("Command execution failed with exit value: " + exitValue);
+
+
+                    // Execute the batch file using cmd.exe
+                    Process process = Runtime.getRuntime().exec("cmd /c start cmd.exe /K " + batchFile.getAbsolutePath());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Please select a file.", "File not selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No file selected.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-
 
 
 
@@ -223,17 +248,5 @@ public class Controls implements ActionListener {
         }
     }
 
-    private void executeCommand(String command) {
-        try {
-
-            Process process = Runtime.getRuntime().exec(command);
-
-            process.waitFor();
-
-            int exitValue = process.exitValue();
-
-        } catch (IOException | InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
 }
+

@@ -3,6 +3,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -154,6 +157,9 @@ public class workarea {
 
     }
 
+
+
+
     /*Method used to count the number of characters in the text area*/
     private void updateCharCount() {
         int charCount = texteditor.getText().length();
@@ -286,7 +292,6 @@ public class workarea {
         this.fontstyle.addActionListener(listener);
         this.fonstyle_I.addActionListener(listener);
     }
-    /*FORMATTING FUNCTIONALITIES*/
 
 
 }

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 
-
+//CONTACT FORM CONTROL CLASS
 
 public class ContactFormControl implements ActionListener {
 
@@ -22,7 +22,7 @@ public class ContactFormControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==cfc.sendButton){
-
+            //SETTING UP THE CONTACT FORM BUTTON TO USE THE JAVA MAIL API
             try{
 
                 mail.setupServerProperties();
@@ -35,13 +35,6 @@ public class ContactFormControl implements ActionListener {
             catch (MessagingException k){
                 k.getMessage();
             }
-            /**
-            String name = cfc.nameField.getText();
-            String email = cfc.emailField.getText();
-            per.setP_name(name);
-            per.setP_email(email);
-            System.out.println("NAME:  " + name);
-            System.out.println("EMAIL:  " + email);**/
             cfc.ContactFrame.dispose();
 
         }
